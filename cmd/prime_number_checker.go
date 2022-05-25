@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -14,21 +15,22 @@ const (
 	commandName    = "pn-checker"
 	diligentOption = "diligent"
 	abuse          = `
- _____ _     _       _       __
-|_   _| |__ (_)_ __ | | __  / _| ___  _ __
-  | | | '_ \| | '_ \| |/ / | |_ / _ \| '__|
-  | | | | | | | | | |   <  |  _| (_) | |
-  |_| |_| |_|_|_| |_|_|\_\ |_|  \___/|_|
-                                 _  __        _               _     _   _
- _   _  ___  _   _ _ __ ___  ___| |/ _|   ___| |_ _   _ _ __ (_) __| | | |
-| | | |/ _ \| | | | '__/ __|/ _ \ | |_   / __| __| | | | '_ \| |/ _  | | |
-| |_| | (_) | |_| | |  \__ \  __/ |  _|  \__ \ |_| |_| | |_) | | (_| | |_|
- \__, |\___/ \__,_|_|  |___/\___|_|_|( ) |___/\__|\__,_| .__/|_|\__,_| (_)
- |___/                               |/                |_|`
+   _____ _     _       _       __
+  |_   _| |__ (_)_ __ | | __  / _| ___  _ __
+    | | | '_ \| | '_ \| |/ / | |_ / _ \| '__|
+    | | | | | | | | | |   <  |  _| (_) | |
+    |_| |_| |_|_|_| |_|_|\_\ |_|  \___/|_|
+                                   _  __        _               _     _   _
+   _   _  ___  _   _ _ __ ___  ___| |/ _|   ___| |_ _   _ _ __ (_) __| | | |
+  | | | |/ _ \| | | | '__/ __|/ _ \ | |_   / __| __| | | | '_ \| |/ _  | | |
+  | |_| | (_) | |_| | |  \__ \  __/ |  _|  \__ \ |_| |_| | |_) | | (_| | |_|
+   \__, |\___/ \__,_|_|  |___/\___|_|_|( ) |___/\__|\__,_| .__/|_|\__,_| (_)
+   |___/                               |/                |_|
+ `
 )
 
 var (
-	version            = "v1.0.0"
+	version            = "v1.1.0"
 	primeNumberChecker = &cobra.Command{
 		Use:     commandName,
 		Short:   fmt.Sprintf("%s is a slightly silly and useless command line tool.", commandName),
@@ -61,7 +63,8 @@ func RunCommand(cmd *cobra.Command, args []string) error {
 	if !isDiligent {
 		rand.Seed(time.Now().UnixNano())
 		if rand.Intn(100) >= 50 {
-			fmt.Println(abuse)
+			c := color.New(color.FgHiRed, color.Bold)
+			c.Println(abuse)
 			return nil
 		}
 	}
