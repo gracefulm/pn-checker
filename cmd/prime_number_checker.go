@@ -30,7 +30,7 @@ const (
 )
 
 var (
-	version            = "v1.1.0"
+	version            = "v1.2.0"
 	primeNumberChecker = &cobra.Command{
 		Use:     commandName,
 		Short:   fmt.Sprintf("%s is a slightly silly and useless command line tool.", commandName),
